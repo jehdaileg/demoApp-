@@ -1,13 +1,34 @@
 <template>
-    <div>
+    <Layout>
 
-        <h5 class="text-4xl">Hello guys, installation done</h5>
+        <h5 class="text-3xl">Home,Hello guys, installation done {{name}} and</h5>
 
-    </div>
+
+    </Layout>
 </template>
 
 <script>
+
+import Layout from "./Shared/Layout.vue";
 export default {
+
+    props: {
+
+        name: {
+            type: String
+        },
+
+        frameworks: {
+            type: Array
+        },
+
+
+    },
+
+    components: {
+        Layout
+    },
+
 
 }
 </script>
