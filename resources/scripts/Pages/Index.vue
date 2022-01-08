@@ -1,10 +1,9 @@
 <template>
-    <Layout>
-
-        <h5 class="text-3xl">Home,Hello guys, installation done {{name}} and</h5>
 
 
-    </Layout>
+        <h5 class="text-3xl">Home,Hello guys, Welcome !!!</h5>
+
+
 </template>
 
 <script>
@@ -12,6 +11,8 @@
 import Layout from "./Shared/Layout.vue";
 export default {
 
+
+    layout: Layout,
     props: {
 
         name: {
@@ -25,9 +26,6 @@ export default {
 
     },
 
-    components: {
-        Layout
-    },
 
 
 }

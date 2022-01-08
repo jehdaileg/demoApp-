@@ -1,5 +1,9 @@
 <template>
-    <Layout>
+
+    <Head>
+        <title>DemoApp- Users</title>
+    </Head>
+
 
         <h5>Users section </h5>
 
@@ -10,7 +14,7 @@
 
         </div>
 
-    </Layout>
+
 </template>
 
 <script>
@@ -18,10 +22,14 @@
 import Layout from "./Shared/Layout.vue";
 
 import { Link } from "@inertiajs/inertia-vue3";
+
+import { Head } from "@inertiajs/inertia-vue3";
 export default {
 
+    layout: Layout,
+
     components: {
-        Layout, Link
+         Link, Head
     },
 
     props: {

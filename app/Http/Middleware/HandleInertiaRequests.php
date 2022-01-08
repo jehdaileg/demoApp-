@@ -38,6 +38,20 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             //
+            'auth' => [
+
+                'user' => [
+                    'username' => 'Jey',
+                    'email' => 'jey@gmail.com'
+                ],
+
+                'token' => [
+                    'value' => 'bkcUGFSKJFGPWJFGJNEGI',
+                    'user_id' => 'user.id'
+
+                ]
+
+            ],
         ]);
     }
 }
