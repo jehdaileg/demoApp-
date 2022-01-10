@@ -14,7 +14,7 @@
 
                     <li>
                         <Link
-                        href="/users?data1=hello&data2=iLoveYou"
+                        href="/users"
                         :class="{'font-bold underline text-pink-500': $page.url.startsWith('/users')}"
                         >
                         Users

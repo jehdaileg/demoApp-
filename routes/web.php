@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Carbon\Carbon;
 use Inertia\Inertia;
 use Faker\Provider\ar_EG\Internet;
@@ -29,7 +30,12 @@ Route::get('/users', function(){
     sleep(2);
     return Inertia::render('Users', [
 
-        'time' => now()->toTimeString()
+        'time' => now()->toTimeString(),
+
+        'users' => User::all()->map(fn($user) => [
+            'name' => $user->name,
+            'created_at' => $user->created_at
+        ]),
     ]);
 
 });
