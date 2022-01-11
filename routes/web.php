@@ -1,10 +1,12 @@
 <?php
 
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\User;
 use Inertia\Inertia;
 use Faker\Provider\ar_EG\Internet;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,15 +29,40 @@ Route::get('/', function () {
 
 Route::get('/users', function(){
 
+    /*
     sleep(2);
     return Inertia::render('Users', [
 
         'time' => now()->toTimeString(),
 
         'users' => User::all()->map(fn($user) => [
+            'id' => $user->id,
             'name' => $user->name,
             'created_at' => $user->created_at
         ]),
+    ]);
+    */
+
+    return Inertia::render('Users', [
+
+        'users' => User::query()
+                            ->when(Request::input('search'), function ($query,$search){
+                                $query->where('name', 'like', "%{$search}%");
+                            })
+                            ->paginate(10)
+                            ->withQueryString()
+                            ->through(fn($user) => [
+
+                            'id' => $user->id,
+                            'name' => $user->name,
+                            'created_at' => $user->created_at
+
+              ]),
+
+              'filters' => Request::only(['search']),
+
+
+
     ]);
 
 });
