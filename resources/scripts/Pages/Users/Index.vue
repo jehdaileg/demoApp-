@@ -8,6 +8,8 @@
         <div class="flex justify-between mb-6">
             <h5>Users section </h5>
 
+            <Link href="/users/create" class="text-blue-500">Add User</Link>
+
             <input type="text" v-model="search" placeholder="Search ..." class="border-blue-300 px-2 rounded-lg" />
 
         </div>
@@ -30,9 +32,7 @@
             </table>
         </div>
 
-
             <Pagination :links="users.links" class="mt-6" />
-
 
         <div style="margin-top: 800px;">
             <p>The current time is {{ time }}</p>
@@ -46,15 +46,18 @@
 
 <script>
 
-import Layout from "./Shared/Layout.vue";
+import Layout from "../Shared/Layout.vue";
 
-import Pagination from "./Shared/Pagination.vue";
+import Pagination from "../Shared/Pagination.vue";
 
 import { Link } from "@inertiajs/inertia-vue3";
 
 import { Head } from "@inertiajs/inertia-vue3";
 
 import Inertia from "@inertiajs/inertia";
+
+import throttle from "lodash/throttle";
+
 export default {
 
     layout: Layout,
@@ -100,7 +103,9 @@ export default {
               replace: true,
 
           })
-        }
+        },
+
+
     }
 
 }

@@ -43,7 +43,7 @@ Route::get('/users', function(){
     ]);
     */
 
-    return Inertia::render('Users', [
+    return Inertia::render('Users/Index', [
 
         'users' => User::query()
                             ->when(Request::input('search'), function ($query,$search){
@@ -62,8 +62,35 @@ Route::get('/users', function(){
               'filters' => Request::only(['search']),
 
 
+    ]);
+
+});
+
+Route::get('/users/create', function(){
+
+    return Inertia::render('Users/Create', [
+
+        'test' => 'This is a test'
 
     ]);
+
+});
+
+Route::post('/users', function(){
+
+    sleep(1);
+
+    $attributes = Request::validate([
+
+        'name' => 'required',
+        'email' => ['required', 'email'],
+        'password' => ['required', 'confirmed']
+
+    ]);
+
+    User::create($attributes);
+
+    return redirect('/users');
 
 });
 
