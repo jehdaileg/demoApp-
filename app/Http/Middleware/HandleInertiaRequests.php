@@ -2,8 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -38,20 +39,16 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             //
-            'auth' => [
+
+            'auth' => Auth::user() ? [
 
                 'user' => [
-                    'username' => 'Jey',
-                    'email' => 'jey@gmail.com'
-                ],
 
-                'token' => [
-                    'value' => 'bkcUGFSKJFGPWJFGJNEGI',
-                    'user_id' => 'user.id'
-
+                    'username' => Auth::user()->name
                 ]
 
-            ],
+            ]: null ,
+
         ]);
     }
 }

@@ -2,7 +2,7 @@
         <div>
 
             <nav class="ml-6">
-                <ul class="flex list-disc space-x-4 list-inside">
+                <ul class="flex space-x-4 list-inside">
                     <li>
                         <Link
                         href="/"
@@ -37,7 +37,7 @@
                         </Link>
 
                     </li>
-                    <li><Link href="/login" method="post" as="button" :data="{foo: 'barron'}" class="hover:text-blue-500 hover:underline">Login</Link></li>
+                    <li><Link href="/login" method="post" as="button" :data="{foo: 'barron'}" class="hover:text-blue-500 hover:underline">Try</Link></li>
                 </ul>
             </nav>
 

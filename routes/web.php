@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Carbon\Carbon;
 use App\Models\User;
 use Inertia\Inertia;
@@ -8,16 +9,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'store']);
+Route::post('/logout', [AuthController::class, 'destroy'])->middleware('auth');
+
+Route::middleware('auth')->group(function (){
 
 Route::get('/', function () {
     return Inertia::render('Index', [
@@ -25,6 +22,53 @@ Route::get('/', function () {
         'frameworks' => ['Vue js', 'Tailwindcss', 'Laravel']
 
     ]);
+});
+
+
+Route::get('/settings', function(){
+
+    sleep(2);
+
+    return Inertia::render('Setings');
+
+});
+
+Route::post('/login', function(){
+
+    dd(request('foo'));
+
+});
+
+});
+
+
+
+Route::get('/users/create', function(){
+
+    return Inertia::render('Users/Create', [
+
+        'test' => 'This is a test'
+
+    ]);
+
+});
+
+Route::post('/users', function(){
+
+    sleep(1);
+
+    $attributes = Request::validate([
+
+        'name' => 'required',
+        'email' => ['required', 'email'],
+        'password' => ['required', 'confirmed']
+
+    ]);
+
+    User::create($attributes);
+
+    return redirect('/users');
+
 });
 
 Route::get('/users', function(){
@@ -66,44 +110,5 @@ Route::get('/users', function(){
 
 });
 
-Route::get('/users/create', function(){
 
-    return Inertia::render('Users/Create', [
 
-        'test' => 'This is a test'
-
-    ]);
-
-});
-
-Route::post('/users', function(){
-
-    sleep(1);
-
-    $attributes = Request::validate([
-
-        'name' => 'required',
-        'email' => ['required', 'email'],
-        'password' => ['required', 'confirmed']
-
-    ]);
-
-    User::create($attributes);
-
-    return redirect('/users');
-
-});
-
-Route::get('/settings', function(){
-
-    sleep(2);
-
-    return Inertia::render('Setings');
-
-});
-
-Route::post('/login', function(){
-
-    dd(request('foo'));
-
-});
